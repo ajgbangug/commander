@@ -1,0 +1,22 @@
+The Commander System Instructions
+
+How to setup the client:
+Before doing all of this make a sudo account with the username $USERNAME and password $PASSWORD.
+Disable asking for a password. Login to the account then follow the instructions below.
+this must be the same for all the client nodes.
+1. Install mongodb(?), python-dev, build-essential, pip and pymongo.
+2. Install facter and ruby-json.
+3. wget the client program from the repository.
+4. Exract the client program on the home directory and make script executable.
+5. Make a folder named "commander" on the /opt directory and make a link to the client program.
+5. Add an entry to the crontab (sudo) that will run every $MIN minutes.
+
+How to setup the server:
+1. install mongodb
+2. install php mongodb driver
+3. install fabric
+4. install pymongo
+5. enable authentication in mongodb
+6. create the database accounts
+7. edit the config files for the system and the taskrunner
+8. add the taskrunner to the crontab
