@@ -6,7 +6,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="span8 offset2">
+    <div class="span7 offset2">
         <table class="table table-hover" id="host_list">
             <caption><h4>Available Hosts</h4></caption>
             <thead>
@@ -39,7 +39,7 @@
             </tbody>
         </table>
     </div>
-    <div class="span5 offset1">
+    <div class="span5">
         <div class="tabbable">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#tab1" data-toggle="tab">Install/Remove</a></li>

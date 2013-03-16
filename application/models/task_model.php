@@ -15,6 +15,22 @@ class Task_model extends CI_Model {
         return $collection->insert($task);
     }
 
+    public function addLog($task) {
+        $mongo = $this->login();
+        $this->config->load('mongodb');
+        $db = $mongo->selectDB($this->config->item('dbname'));
+        $collection = $db->logs;
+        return $collection->insert($task);
+    }
+
+    public function getLogs($criteria, $columns) {
+        $mongo = $this->login();
+        $this->config->load('mongodb');
+        $db = $mongo->selectDB($this->config->item('dbname'));
+        $collection = $db->logs;
+        return iterator_to_array($collection->find($criteria , $columns));
+    }
+
     public function login() {
         $this->config->load('mongodb');
         $dbname = $this->config->item('dbname');

@@ -12,7 +12,7 @@
                     <div class="container">
                         <a class="brand" href="#">Commander</a>
                         <ul class="nav">
-                            <li class="active"><a href="<?php echo site_url("dashboard");?>">Dashboard</a></li>
+                            <li class="active"><a href="<?php echo site_url("home");?>">Home</a></li>
                             <li class="active"><a href="<?php echo site_url("hosts");?>">Hosts</a></li>
                             <li class="active"><a href="#">Server Config</a></li>
                         </ul>
