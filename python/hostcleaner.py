@@ -17,6 +17,7 @@ if __name__ == '__main__':
     hosts = db.hosts
     host_list = hosts.find()
 
+    status = {'online' : 0}
     for h in host_list:
         if not fabfile.is_host_up(h['ipaddress']):
-            hosts.remove(h['_id'])
+            hosts.update({'_id': h['_id']}, {'$set' : status})

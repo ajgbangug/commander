@@ -22,19 +22,27 @@ class Action extends CI_Controller {
                 );
                 break;
             case 'install':
-                $packages = $data['packages'];
+                $packages = explode(' ', $data['packages']);
+                $clean_packages = array();
+                foreach ($packages as $p) {
+                    array_push($clean_packages, '"'.$p.'"');
+                }
                 $to_queue = array(
                     'host_list' => $host_list,
                     'operation' => 'install',
-                    'args' => $packages
+                    'args' => $clean_packages
                 );
                 break;
             case 'remove':
-                $packages = $data['packages'];
+                $packages = explode(' ', $data['packages']);
+                $clean_packages = array();
+                foreach ($packages as $p) {
+                    array_push($clean_packages, '"'.$p.'"');
+                }
                 $to_queue = array(
                     'host_list' => $host_list,
                     'operation' => 'remove',
-                    'args' => $packages
+                    'args' => $clean_packages
                 );
                 break;
             case 'upgrade':

@@ -28,4 +28,16 @@ if __name__ == '__main__':
             execute(fabfile.upgrade)
         elif t['operation'] == 'update':
             execute(fabfile.update)
+        elif t['operation'] == 'install':
+            package_string = ""
+            packages = t['args']
+            for p in packages:
+                package_string = package_string + p + " "
+            execute(fabfile.install, package_string)
+        elif t['operation'] == 'remove':
+            package_string = ""
+            packages = t['args']
+            for p in packages:
+                package_string = package_string + p + " "
+            execute(fabfile.remove, package_string)
         tasks.remove(t['_id'])

@@ -8,12 +8,12 @@ class Hosts_model extends CI_Model {
         
     }
 
-    public function getHosts() {
+    public function getHosts($criteria, $columns) {
         $mongo = $this->login();
         $this->config->load('mongodb');
         $db = $mongo->selectDB($this->config->item('dbname'));
         $collection = $db->hosts;
-        return iterator_to_array($collection->find());
+        return iterator_to_array($collection->find($criteria , $columns));
     }
 
     public function deepDive($id) {

@@ -1,6 +1,7 @@
 from fabric.api import *
 import socket
 import paramiko
+import string
 
 def is_host_up(host):
     original_timeout = socket.getdefaulttimeout()
@@ -26,7 +27,7 @@ def shutdown():
     if is_host_up(env.host):
         sudo("shutdown -P 0")
 
-    @task
+@task
 @parallel
 def update():
     if is_host_up(env.host):
@@ -43,5 +44,12 @@ def upgrade():
 @parallel
 def install(package):
     if is_host_up(env.host):
-        sudo("apt-get update")
-        sudo("apt-get -y install")
+        #sudo("apt-get update")
+        sudo("apt-get -y install %s" % package)
+
+@task
+@parallel
+def remove(package):
+    if is_host_up(env.host):
+        #sudo("apt-get update")
+        sudo("apt-get -y remove %s" % package)

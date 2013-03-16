@@ -4,7 +4,7 @@ $(document).ready(function() {
 		$('form').submit(function(e) {
 			e.preventDefault();
 			selected.length = 0;
-			$('.add_button.active').each(function() {
+			$('.select_button.active').each(function() {
 				selected.push($(this).val());
 			});
 			$('.selection_list').val(selected);
@@ -14,36 +14,32 @@ $(document).ready(function() {
 			});
 		})
 	})();
-	/*
-	(function() {
-		$('.add_button').click(function() {
-			var select_flag = $(this).next('.select_flag');
-			if(select_flag.val() == "false") {
-				$(this).html('Selected');
-				select_flag.val("true");
-				alert($(this).val());
-			} else {
-				$(this).html('Not Selected');
-				select_flag.val("false");
-				alert($(this).val());
-			}
-		});
-		
-	})();
-*/
-	/*
+
+	// this part of the code updates the status of the hosts
 	(function() {
 		function updateHosts() {
 			var host_list = new Array();
-			$('input:checkbox[name=selection]').each(function() {
-				host_list.push($(this).val());
-			});
-			$.post(base_url+'index.php/hosts/refreshList', {'host_list' : host_list}, function(data) {
-				alert(data);
-			});
+			$.post(base_url+'index.php/hosts/refreshList', null, function(data) {
+				status_list = $.parseJSON(data);
+				$('.status_indicator').each(function(i, obj){
+					if(status_list[obj.id])
+						$(this).html('<span class="label label-success">Available</span>');
+					else
+						$(this).html('<span class="label label-important">Unavailable</span>');
+				});
+			});	
 		}
 		updateHosts();
-		setInterval(loadHosts, 1000);
+		setInterval(updateHosts, 10000);
 	})();
-*/
+
+	(function() {
+		$('.select_button').click(function() {
+			button = $(this);
+			if(button.hasClass('active'))
+				button.html('Select');
+			else
+				button.html('Selected');
+		});
+	})();
 });

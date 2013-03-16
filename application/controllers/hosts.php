@@ -10,7 +10,8 @@ class Hosts extends CI_Controller {
     public function index()
     {
         $this->load->model('hosts_model');
-        $data['host_list'] = $this->hosts_model->getHosts();
+        $data['host_list'] = $this->hosts_model->getHosts(array(),
+            array('hostname', 'operatingsystem', 'lsbdistrelease', 'macaddress', 'ipaddress'));
         $data['title'] = 'Hosts';
         $this->load->view('templates/header', $data);
         $this->load->view('pages/hosts', $data);
@@ -19,18 +20,13 @@ class Hosts extends CI_Controller {
 
     public function refreshList()
     {
-        $host_list = $this->input->post('host_list');
-        var_dump($host_list);
-        /*
         $this->load->model('hosts_model');
-        $remove_list = array();
+        $host_list = $this->hosts_model->getHosts(array(), array('macaddress', 'online'));
+        $status_list = array();
         foreach ($host_list as $h) {
-            if(!$this->hosts_model->deepDive(array('hostname' => $h))) {
-                array_push($remove_list, $h); 
-            }
+            $status_list[$h['macaddress']] = $h['online'];
         }
-
-        print_r($remove_list);*/
+        echo json_encode($status_list);
     }
 }
 

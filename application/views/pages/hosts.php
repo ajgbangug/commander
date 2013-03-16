@@ -7,7 +7,7 @@
 </div>
 <div class="row">
     <div class="span8 offset2">
-        <table class="table table-hover">
+        <table class="table table-hover" id="host_list">
             <caption><h4>Available Hosts</h4></caption>
             <thead>
                 <tr>
@@ -26,24 +26,11 @@
                         <td><?php echo $h['hostname']; ?></td>
                         <td><?php echo $h['operatingsystem']; ?></td>
                         <td><?php echo $h['lsbdistrelease']; ?></td>
-                        <td>
-                            <?php
-                                if($h['online']) {
-                            ?>
-                                    <span class="label label-success">Available</span>
-                            <?php
-                                } else {
-                            ?>
-                                    <span class="label label-important">Unavailable</span>
-                            <?php        
-                                }
-                            ?>
-                        </td>
+                        <td class="status_indicator" id="<?php echo $h['macaddress']; ?>"></td>
                         <td>
                             <a href="<?php echo site_url("profile/view")."/".$h['hostname'];?>"
                                 role="button" class="view_button btn btn-small btn-info">View</a>
-                            <button class="add_button btn btn-small btn-info"
-                                value="<?php echo $h['ipaddress']; ?>" data-toggle="buttons-checkbox">Select</button>
+                            <button value="<?php echo $h['ipaddress'];?>" type="button" class="btn btn-small select_button" data-toggle="button">Select</button>
                         </td>
                     </tr>
                 <?php
