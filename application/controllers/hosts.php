@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Hosts extends CI_Controller {
+class Hosts extends MY_Controller {
 
     public function __construct()
     {
@@ -9,24 +9,52 @@ class Hosts extends CI_Controller {
 
     public function index()
     {
-        $this->load->model('hosts_model');
-        $data['host_list'] = $this->hosts_model->getHosts(array(),
-            array('hostname', 'operatingsystem', 'lsbdistrelease', 'macaddress', 'ipaddress'));
-        $data['title'] = 'Hosts';
-        $this->load->view('templates/header', $data);
-        $this->load->view('pages/hosts', $data);
-        $this->load->view('templates/footer', $data);
+        if ($this->is_logged_in()) {
+            $this->load->model('hosts_model');
+            $this->load->model('task_model');
+
+            $data['host_list'] = $this->hosts_model->getHosts(array(),
+                array('hostname', 'operatingsystem', 'lsbdistrelease', 'macaddress', 'ipaddress'));
+            $data['title'] = 'Hosts';
+            $data['log_list'] = $this->task_model->getLogs(array(), array());;
+            $this->load->view('templates/header', $data);
+            $this->load->view('pages/hosts', $data);
+            $this->load->view('templates/footer', $data);
+        } else {
+            redirect('login');
+        }
     }
 
     public function refreshList()
     {
-        $this->load->model('hosts_model');
-        $host_list = $this->hosts_model->getHosts(array(), array('macaddress', 'online'));
-        $status_list = array();
-        foreach ($host_list as $h) {
-            $status_list[$h['macaddress']] = $h['online'];
+        if ($this->is_logged_in()) {
+            $this->load->model('hosts_model');
+            $host_list = $this->hosts_model->getHosts(array(), array('macaddress', 'online'));
+            $status_list = array();
+            foreach ($host_list as $h) {
+                $status_list[$h['macaddress']] = $h['online'];
+            }
+            echo json_encode($status_list);
+        } else {
+            redirect('login');
         }
-        echo json_encode($status_list);
+    }
+
+    public function profile() {
+        if($this->is_logged_in()) {
+            $this->load->model('hosts_model');
+            $mac = $this->input->post('macaddress');
+            $criteria = array(
+                'macaddress' => $mac
+            );
+            
+            $data['profile'] = $this->hosts_model->deepDive($criteria);
+            $this->load->view('templates/header', $data);
+            $this->load->view('pages/profile', $data);
+            $this->load->view('templates/footer', $data);
+        } else {
+            redirect('login');
+        }
     }
 }
 

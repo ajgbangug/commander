@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	(function() {
 		var selected = new Array();
-		$('form').submit(function(e) {
+		$('.operation').submit(function(e) {
 			e.preventDefault();
 			selected.length = 0;
 			$('.select_button.active').each(function() {

@@ -12,9 +12,10 @@
                     <div class="container">
                         <a class="brand" href="#">Commander</a>
                         <ul class="nav">
-                            <li class="active"><a href="<?php echo site_url("home");?>">Home</a></li>
-                            <li class="active"><a href="<?php echo site_url("hosts");?>">Hosts</a></li>
-                            <li class="active"><a href="#">Server Config</a></li>
+                            <li><a href="<?php echo site_url("home");?>">Home</a></li>
+                            <li><a href="<?php echo site_url("hosts");?>">Hosts</a></li>
+                            <li><a href="<?php echo site_url("config");?>">Config</a></li>
+                            <li><a href="<?php echo site_url("login/logout");?>">Logout</a></li>
                         </ul>
                     </div>
                 </div>

@@ -3,12 +3,17 @@
         <div class="page-header">
             <h3>Control Panel</h3>
         </div>
+        <h5>
+            To execute a task, first select the hosts that will be affected using the <code>Select</code> button.
+            The <code>View</code> button will allow you to see some of the system information of the host.
+            Afterwards, select an operation that you want to do (either <code>Install/Remove</code>, 
+            <code>Upgrade</code> or <code>Shutdown/Reboot</code>) then click <code>Queue task</code>.
+        </h5>
     </div>
 </div>
 <div class="row">
     <div class="span7 offset2">
         <table class="table table-hover" id="host_list">
-            <caption><h4>Available Hosts</h4></caption>
             <thead>
                 <tr>
                     <th>Hostname</th>
@@ -28,9 +33,15 @@
                         <td><?php echo $h['lsbdistrelease']; ?></td>
                         <td class="status_indicator" id="<?php echo $h['macaddress']; ?>"></td>
                         <td>
-                            <a href="<?php echo site_url("profile/view")."/".$h['hostname'];?>"
-                                role="button" class="view_button btn btn-small btn-info">View</a>
-                            <button value="<?php echo $h['ipaddress'];?>" type="button" class="btn btn-small select_button" data-toggle="button">Select</button>
+                            <?php echo form_open('hosts/profile', '', array('macaddress' => $h['macaddress'])); ?>
+                                <?php
+                                    echo form_submit(array(
+                                        'class' => 'view_button btn btn-small btn-info',
+                                        'value' => 'View'
+                                    ));
+                                ?>
+                                <button value="<?php echo $h['ipaddress'];?>" type="button" class="btn btn-small select_button" data-toggle="button">Select</button>
+                            <?php echo form_close(); ?>
                         </td>
                     </tr>
                 <?php
@@ -48,7 +59,7 @@
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="tab1">
-                    <?php echo form_open('action/enqueue'); ?>
+                    <?php echo form_open('action/enqueue', array('class' => 'operation')); ?>
                         <input type="hidden" name="selection_list" class="selection_list"/>
                         <p><?php echo form_radio('task', 'install');?> Install software</p>
                         <p><?php echo form_radio('task', 'remove');?> Remove software</p>
@@ -72,7 +83,7 @@
                     <?php echo form_close(); ?>
                 </div>
                 <div class="tab-pane" id="tab2">
-                    <?php echo form_open('action/enqueue'); ?>
+                    <?php echo form_open('action/enqueue', array('class' => 'operation')); ?>
                     <input type="hidden" name="selection_list" class="selection_list"/>
                     <p><?php echo form_radio('task', 'upgrade');?> Upgrade all packages</p>
                     <p><?php echo form_radio('task', 'dist-upgrade');?> Upgrade Distribution</p>
@@ -87,7 +98,7 @@
                 <?php echo form_close(); ?>
                 </div>
                 <div class="tab-pane" id="tab3">
-                    <?php echo form_open('action/enqueue'); ?>
+                    <?php echo form_open('action/enqueue', array('class' => 'operation')); ?>
                     <input type="hidden" name="selection_list" class="selection_list"/>
                     <p><?php echo form_radio('task', 'reboot');?> Reboot Computer</p>
                     <p><?php echo form_radio('task', 'shutdown');?> Shutdown Computer</p>
