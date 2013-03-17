@@ -29,6 +29,7 @@ class Login extends MY_Controller {
     }
 
     public function logout() {
+        session_start();
         session_destroy();
         redirect('login');
     }
