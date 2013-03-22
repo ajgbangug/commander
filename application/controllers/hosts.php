@@ -48,7 +48,7 @@ class Hosts extends MY_Controller {
                 'macaddress' => $mac
             );
             
-            $data['profile'] = $this->hosts_model->deepDive($criteria);
+            $data['profile'] = $this->hosts_model->deepDive($criteria, array());
             $this->load->view('templates/header', $data);
             $this->load->view('pages/profile', $data);
             $this->load->view('templates/footer', $data);

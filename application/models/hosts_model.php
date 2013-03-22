@@ -16,12 +16,12 @@ class Hosts_model extends CI_Model {
         return iterator_to_array($collection->find($criteria , $columns));
     }
 
-    public function deepDive($id) {
+    public function deepDive($id, $columns) {
         $mongo = $this->login();
         $this->config->load('mongodb');
         $db = $mongo->selectDB($this->config->item('dbname'));
         $collection = $db->hosts;
-        return $collection->findOne($id);
+        return $collection->findOne($id, $columns);
     }
 
     public function login() {

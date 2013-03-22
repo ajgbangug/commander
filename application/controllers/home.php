@@ -21,6 +21,21 @@ class Home extends MY_Controller {
             redirect('login');
         }
     }
+
+    public function refreshLogs()
+    {
+        if ($this->is_logged_in()) {
+            $this->load->model('task_model');
+            $host_list = $this->task_model->getLogs(array(), array('_id','successful'));
+            $status_list = array();
+            foreach ($host_list as $h) {
+                $status_list[$h['_id']->{'$id'}] = $h['successful'];
+            }
+            echo json_encode($status_list);
+        } else {
+            redirect('login');
+        }
+    }
 }
 
 /* End of file home.php */

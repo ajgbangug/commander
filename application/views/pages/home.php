@@ -26,7 +26,7 @@
                 <?php
                     foreach ($log_list as $l) {
                 ?>
-                    <tr class="success">
+                    <tr id="<?php echo $l['_id'];?>" class="success status_indicator">
                         <td>
                             <?php echo $l['time']; ?>
                         </td>
@@ -47,9 +47,7 @@
                         <td>
                             <ul>
                             <?php
-                                foreach ($l['hostnames'] as $h) {
-                                    echo '<li>'.$h['hostname'].'</li>';
-                                }
+                                echo $l['hostname'];
                             ?>
                             </ul>
                         </td>

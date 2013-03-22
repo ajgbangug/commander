@@ -40,7 +40,7 @@
                                         'value' => 'View'
                                     ));
                                 ?>
-                                <button value="<?php echo $h['ipaddress'];?>" type="button" class="btn btn-small select_button" data-toggle="button">Select</button>
+                                <button value="<?php echo $h['macaddress'];?>" type="button" class="btn btn-small select_button" data-toggle="button">Select</button>
                             <?php echo form_close(); ?>
                         </td>
                     </tr>
