@@ -36,6 +36,16 @@ class Home extends MY_Controller {
             redirect('login');
         }
     }
+
+    public function clear() {
+        if($this->is_logged_in()) {
+            $this->load->model('task_model');
+            $this->task_model->clear();
+            redirect('home');
+        } else {
+            redirect('login');
+        }
+    }
 }
 
 /* End of file home.php */

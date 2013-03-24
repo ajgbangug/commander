@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="span12 offset2">
+    <div class="span12 offset1">
         <div class="page-header">
             <h3>Dashboard</h3>
         </div>
@@ -13,7 +13,14 @@
     </div>
 </div>
 <div class="row">
-    <div class="span12 offset2">
+    <div class="span12 offset1">
+        <?php
+            echo form_open('home/clear');
+        ?>
+            <input type="submit" class="btn btn-primary" value="Clear Tasks" />
+        <?php
+            echo form_close();
+        ?>
         <table id="log_table" class="table table-hover table-condensed">
             <thead>
                 <tr>

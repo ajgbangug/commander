@@ -1,6 +1,6 @@
 <!--<?php print_r($profile); ?> -->
 <div class="row">
-    <div class="span12 offset2">
+    <div class="span12 offset1">
         <div class="page-header">
             <h3><?php echo $profile['hostname']; ?></h3>
         </div>
@@ -45,7 +45,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="span12 offset2">
+    <div class="span12 offset1">
         <div class="accordion" id="package_accordion">
             <div class="accordion-group">
                 <div class="accordion-heading">
@@ -70,13 +70,3 @@
         </div>
     </div>
 </div>
-<!--
-<?php
-    foreach ($profile['packages'] as $p) {
-?>
-    <li><?php echo $p; ?></li>
-<?php
-    }
-?>
-</ul>
--->

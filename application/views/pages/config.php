@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="span12 offset2">
+    <div class="span12 offset1">
         <div class="page-header">
             <h3>Account Details</h3>
         </div>
@@ -7,7 +7,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="span12 offset2">
+    <div class="span12 offset1">
         <?php echo form_open('config/change_account', array('class' => 'form-horizontal')); ?>
             <fieldset>
                 <div class="control-group">
@@ -48,7 +48,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="span12 offset2">
+    <div class="span12 offset1">
         <div class="page-header">
             <h3>Database Server Details</h3>
         </div>
@@ -56,7 +56,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="span12 offset2">
+    <div class="span12 offset1">
         <table class="table table-hover">
             <thead>
                 <th>Attribute</th>

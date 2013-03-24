@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="span12 offset2">
+    <div class="span12 offset1">
         <div class="page-header">
             <h3>Control Panel</h3>
         </div>
@@ -12,7 +12,15 @@
     </div>
 </div>
 <div class="row">
-    <div class="span7 offset2">
+    <div class="span10 offset1">
+        <?php
+            echo form_open('hosts/clear');
+        ?>
+            <button type="button" class="btn btn select_all" data-toggle="button">Select All</button>
+            <input type="submit" class="btn btn-primary" value="Clear List"/ >
+        <?php
+            echo form_close();
+        ?>
         <table class="table table-hover" id="host_list">
             <thead>
                 <tr>

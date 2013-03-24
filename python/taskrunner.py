@@ -13,7 +13,10 @@ def is_online(mac):
     db.authenticate(config.DBUSER, config.DBPASS)
     hosts = db.hosts
     details = hosts.find_one({'macaddress' : mac})
-    return details['online']
+    if details != None:
+        return details['online']
+    else:
+        return False
 
 if __name__ == '__main__':
     env.user = config.USER_SSH

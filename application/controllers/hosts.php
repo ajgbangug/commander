@@ -56,6 +56,16 @@ class Hosts extends MY_Controller {
             redirect('login');
         }
     }
+
+    public function clear() {
+        if($this->is_logged_in()) {
+            $this->load->model('hosts_model');
+            $this->hosts_model->clear();
+            redirect('hosts');
+        } else {
+            redirect('login');
+        }
+    }
 }
 
 /* End of file hosts.php */

@@ -33,6 +33,14 @@ class Task_model extends CI_Model {
         return new Mongo("mongodb://{$username}:{$password}@{$dbhost}/{$dbname}");
     }
 
+    public function clear() {
+        $mongo = $this->login();
+        $this->config->load('mongodb');
+        $db = $mongo->selectDB($this->config->item('dbname'));
+        $collection = $db->tasks;
+        return $collection->drop();
+    }
+
 }
 
 /* End of file task_model.php */

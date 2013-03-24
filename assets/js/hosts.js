@@ -17,7 +17,7 @@ $(document).ready(function() {
 
 	// this part of the code updates the status of the hosts
 	(function() {
-		function updateHosts() {
+		function updateStatus() {
 			var host_list = new Array();
 			$.post(base_url+'index.php/hosts/refreshList', null, function(data) {
 				status_list = $.parseJSON(data);
@@ -29,8 +29,8 @@ $(document).ready(function() {
 				});
 			});	
 		}
-		updateHosts();
-		setInterval(updateHosts, 10000);
+		updateStatus();
+		setInterval(updateStatus, 10000);
 	})();
 
 	(function() {
@@ -40,6 +40,26 @@ $(document).ready(function() {
 				button.html('Select');
 			else
 				button.html('Selected');
+		});
+	})();
+	(function() {
+		$('.select_all').click(function() {
+			select_all = $(this);
+			if(select_all.hasClass('active')) {
+				select_all.html('Select All');
+				$('.select_button').each(function() {
+					button = $(this);
+					button.removeClass('active');
+					button.html('Select');
+				});
+			} else {
+				select_all.html('Unselect All');
+				$('.select_button').each(function() {
+					button = $(this);
+					button.addClass('active');
+					button.html('Selected');
+				});
+			}
 		});
 	})();
 });
