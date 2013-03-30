@@ -9,9 +9,11 @@ $(document).ready(function() {
 			});
 			$('.selection_list').val(selected);
 			var postData = $(this).serializeArray();
-			$.post(base_url+'index.php/action/enqueue', postData, function(data) {
-				alert("Task has been queued.");
-			});
+			if(confirm("Are you sure you want to queue the task?")) {
+				$.post(base_url+'index.php/action/enqueue', postData, function(data) {
+					alert("Task has been queued.");
+				});
+			}
 		})
 	})();
 
@@ -42,6 +44,7 @@ $(document).ready(function() {
 				button.html('Selected');
 		});
 	})();
+
 	(function() {
 		$('.select_all').click(function() {
 			select_all = $(this);
