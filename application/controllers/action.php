@@ -90,14 +90,27 @@ class Action extends MY_Controller {
                         );
                     }
                     break;
-                case 'dist-upgrade':
+                case 'dist_upgrade':
                     foreach ($mac_list as $m) {
                         $host = $this->hosts_model->deepDive(array('macaddress' => $m),
                             array('hostname'));
                         $to_queue[] = array(
                             'hostname' => $host['hostname'],
                             'macaddress' => $m,
-                            'operation' => 'dist-upgrade',
+                            'operation' => 'dist_upgrade',
+                            'time' => date('Y-m-d H:i:s'),
+                            'successful' => 0
+                        );
+                    }
+                    break;
+                case 'update_info':
+                    foreach ($mac_list as $m) {
+                        $host = $this->hosts_model->deepDive(array('macaddress' => $m),
+                            array('hostname'));
+                        $to_queue[] = array(
+                            'hostname' => $host['hostname'],
+                            'macaddress' => $m,
+                            'operation' => 'update_info',
                             'time' => date('Y-m-d H:i:s'),
                             'successful' => 0
                         );
@@ -108,8 +121,7 @@ class Action extends MY_Controller {
         } else {
             redirect('login');
         }
-    }
-
+    }   
 }
 
 /* End of file action.php */

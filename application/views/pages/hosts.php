@@ -12,7 +12,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="span10 offset1">
+    <div class="span9 offset1">
         <?php
             echo form_open('hosts/clear');
         ?>
@@ -58,12 +58,13 @@
             </tbody>
         </table>
     </div>
-    <div class="span5">
+    <div class="span6">
         <div class="tabbable">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#tab1" data-toggle="tab">Install/Remove</a></li>
                 <li><a href="#tab2" data-toggle="tab">Upgrade</a></li>
                 <li><a href="#tab3" data-toggle="tab">Shutdown/Reboot</a></li>
+                <li><a href="#tab4" data-toggle="tab">Reporting</a></li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="tab1">
@@ -92,33 +93,47 @@
                 </div>
                 <div class="tab-pane" id="tab2">
                     <?php echo form_open('action/enqueue', array('class' => 'operation')); ?>
-                    <input type="hidden" name="selection_list" class="selection_list"/>
-                    <p><?php echo form_radio('task', 'upgrade');?> Upgrade all packages</p>
-                    <p><?php echo form_radio('task', 'dist-upgrade');?> Upgrade Distribution</p>
-                    <p>
-                        <?php
-                            echo form_submit(array(
-                                'class' => 'action_button btn btn-primary',
-                                'value' => 'Queue task'
-                            ));
-                        ?>
-                    </p>
-                <?php echo form_close(); ?>
+                        <input type="hidden" name="selection_list" class="selection_list"/>
+                        <p><?php echo form_radio('task', 'upgrade');?> Upgrade all packages</p>
+                        <p><?php echo form_radio('task', 'dist_upgrade');?> Upgrade distribution</p>
+                        <p>
+                            <?php
+                                echo form_submit(array(
+                                    'class' => 'action_button btn btn-primary',
+                                    'value' => 'Queue task'
+                                ));
+                            ?>
+                        </p>
+                    <?php echo form_close(); ?>
                 </div>
                 <div class="tab-pane" id="tab3">
                     <?php echo form_open('action/enqueue', array('class' => 'operation')); ?>
-                    <input type="hidden" name="selection_list" class="selection_list"/>
-                    <p><?php echo form_radio('task', 'reboot');?> Reboot Computer</p>
-                    <p><?php echo form_radio('task', 'shutdown');?> Shutdown Computer</p>
-                    <p>
-                        <?php
-                            echo form_submit(array(
-                                'class' => 'action_button btn btn-primary',
-                                'value' => 'Queue task'
-                            ));
-                        ?>
-                    </p>
-                <?php echo form_close(); ?>
+                        <input type="hidden" name="selection_list" class="selection_list"/>
+                        <p><?php echo form_radio('task', 'reboot');?> Reboot computer</p>
+                        <p><?php echo form_radio('task', 'shutdown');?> Shutdown computer</p>
+                        <p>
+                            <?php
+                                echo form_submit(array(
+                                    'class' => 'action_button btn btn-primary',
+                                    'value' => 'Queue task'
+                                ));
+                            ?>
+                        </p>
+                    <?php echo form_close(); ?>
+                </div>
+                <div class="tab-pane" id="tab4">
+                    <?php echo form_open('action/enqueue', array('class' => 'operation')); ?>
+                        <input type="hidden" name="selection_list" class="selection_list"/>
+                        <p><?php echo form_radio('task', 'update_info');?> Update inventory information</p>
+                        <p>
+                            <?php
+                                echo form_submit(array(
+                                    'class' => 'action_button btn btn-primary',
+                                    'value' => 'Queue task'
+                                ));
+                            ?>
+                        </p>
+                    <?php echo form_close(); ?>
                 </div>
             </div>
         </div>

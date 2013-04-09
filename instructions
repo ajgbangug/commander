@@ -4,12 +4,11 @@ How to setup the client:
 Before doing all of this make a sudo account with the username $USERNAME and password $PASSWORD.
 Disable asking for a password. Login to the account then follow the instructions below.
 this must be the same for all the client nodes.
-1. Install mongodb(?), python-dev, build-essential, pip and pymongo.
-2. Install facter and ruby-json.
+1. Install python-dev, build-essential, pip and pymongo.
+2. Install facter and libjson-ruby.
 3. wget the client program from the repository.
-4. Exract the client program on the home directory and make script executable.
-5. Make a folder named "commander" on the /opt directory and make a link to the client program.
-5. Add an entry to the crontab (sudo) that will run every $MIN minutes.
+4. Exract the client program on the /opt directory and add it in /usr/bin as commander-client.
+5. Execute the client program once to register the machine into the system.
 
 How to setup the server:
 1. install mongodb

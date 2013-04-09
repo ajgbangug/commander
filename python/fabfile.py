@@ -42,6 +42,13 @@ def upgrade():
 
 @task
 @parallel
+def dist_upgrade():
+    if is_host_up(env.host):
+        sudo("apt-get update")
+        sudo("apt-get -y dist-upgrade")
+
+@task
+@parallel
 def install(package):
     if is_host_up(env.host):
         #sudo("apt-get update")
@@ -53,3 +60,10 @@ def remove(package):
     if is_host_up(env.host):
         #sudo("apt-get update")
         sudo("apt-get -y remove %s" % package)
+
+@task
+@parallel
+def update_info():
+    if is_host_up(env.host):
+        #sudo("apt-get update")
+        sudo("commander-client")

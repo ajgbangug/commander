@@ -40,8 +40,12 @@ if __name__ == '__main__':
                 execute(fabfile.reboot)
             elif t['operation'] == 'upgrade':
                 execute(fabfile.upgrade)
+            elif t['operation'] == 'dist_upgrade':
+                execute(fabfile.dist_upgrade)
             elif t['operation'] == 'update':
                 execute(fabfile.update)
+            elif t['operation'] == 'update_info':
+                execute(fabfile.update_info)
             elif t['operation'] == 'install':
                 package_string = ""
                 packages = t['args']
