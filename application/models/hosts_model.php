@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Hosts_model extends CI_Model {
+class Hosts_model extends MY_Model {
 
     public function __construct()
     {
@@ -9,37 +9,21 @@ class Hosts_model extends CI_Model {
     }
 
     public function getHosts($criteria, $columns) {
-        $mongo = $this->login();
-        $this->config->load('mongodb');
-        $db = $mongo->selectDB($this->config->item('dbname'));
+        $db = $this->load_db();
         $collection = $db->hosts;
         return iterator_to_array($collection->find($criteria , $columns));
     }
 
     public function deepDive($id, $columns) {
-        $mongo = $this->login();
-        $this->config->load('mongodb');
-        $db = $mongo->selectDB($this->config->item('dbname'));
+        $db = $this->load_db();
         $collection = $db->hosts;
         return $collection->findOne($id, $columns);
     }
 
-    public function login() {
-        $this->config->load('mongodb');
-        $dbname = $this->config->item('dbname');
-        $dbhost = $this->config->item('dbhost');
-        $username = $this->config->item('username');
-        $password = $this->config->item('password');
-        
-        return new Mongo("mongodb://{$username}:{$password}@{$dbhost}/{$dbname}");
-    }
-
-    public function clear() {
-        $mongo = $this->login();
-        $this->config->load('mongodb');
-        $db = $mongo->selectDB($this->config->item('dbname'));
+    public function delete($details) {
+        $db = $this->load_db();
         $collection = $db->hosts;
-        return $collection->drop();
+        return $collection->remove($details);
     }
 }
 

@@ -15,11 +15,12 @@ class Config extends MY_Controller {
             $this->config->load('mongodb');
             $data['dbname'] = $this->config->item('dbname');
             $data['dbhost'] = $this->config->item('dbhost');
-            $data['username'] = $this->config->item('username');
+            $data['dbusername'] = $this->config->item('username');
             $data['account'] = $this->user_model->getUser(array('username' => $username));
             $data['title'] = 'Config';
             $this->load->view('templates/header', $data);
-            $this->load->view('pages/config', $data);
+            $this->load->view('pages/config/page_header');
+            $this->load->view('pages/config/config_main', $data);
             $this->load->view('templates/footer');
         } else {
             redirect('login');
@@ -38,10 +39,14 @@ class Config extends MY_Controller {
 
             if($this->form_validation->run() == FALSE) {
                 $username = $_SESSION['username'];
+                $data['dbname'] = $this->config->item('dbname');
+                $data['dbhost'] = $this->config->item('dbhost');
+                $data['dbusername'] = $this->config->item('username');
                 $data['account'] = $this->user_model->getUser(array('username' => $username));
                 $data['title'] = 'Config';
                 $this->load->view('templates/header', $data);
-                $this->load->view('pages/config', $data);
+                $this->load->view('pages/config/page_header');
+                $this->load->view('pages/config/config_main', $data);
                 $this->load->view('templates/footer');
             } else {
                 $username = $this->input->post('username');
@@ -56,6 +61,44 @@ class Config extends MY_Controller {
         }
     }
 
+    public function add_account() {
+        if($this->is_logged_in()) {
+            $this->load->model('user_model');
+            $this->load->library('form_validation');
+
+            $this->form_validation->set_rules('new_account_username', 'Username',
+                'required|callback_username_not_exists');
+            $this->form_validation->set_rules('new_account_password', 'Password',
+                'required|matches[new_account_conf_password]');
+            $this->form_validation->set_rules('new_account_conf_password', 'Confirm Password', 'required');
+
+            if($this->form_validation->run() == FALSE) {
+                $username = $_SESSION['username'];
+                $data['dbname'] = $this->config->item('dbname');
+                $data['dbhost'] = $this->config->item('dbhost');
+                $data['dbusername'] = $this->config->item('username');
+                $data['account'] = $this->user_model->getUser(array('username' => $username));
+                $data['title'] = 'Config';
+                
+                $this->load->view('templates/header', $data);
+                $this->load->view('pages/config/page_header');
+                $this->load->view('pages/config/config_main', $data);
+                $this->load->view('templates/footer');
+            } else {
+                $username = $this->input->post('new_account_username');
+                $password = $this->input->post('new_account_password');
+                $details = array(
+                    'username' => $username,
+                    'password' => $password
+                );
+                $this->user_model->addUser($details);
+                $data['title'] = 'Account Creation Successful!';
+                $this->load->view('templates/header', $data);
+                $this->load->view('pages/config/success_new_account');
+                $this->load->view('templates/footer');
+            }
+        }
+    }
 }
 
 /* End of file config.php */

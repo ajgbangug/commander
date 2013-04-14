@@ -15,14 +15,16 @@ class Home extends MY_Controller {
             $log_list = $this->task_model->getLogs(array(), array());
             $data['log_list'] = $log_list;
             $this->load->view('templates/header', $data);
-            $this->load->view('pages/home', $data);
+            $this->load->view('pages/home/page_header', $data);
+            $this->load->view('pages/home/tasks_table', $data);
+            $this->load->view('pages/home/js_includes', $data);
             $this->load->view('templates/footer', $data);
         } else {
             redirect('login');
         }
     }
 
-    public function refreshLogs()
+    public function refresh_logs()
     {
         if ($this->is_logged_in()) {
             $this->load->model('task_model');

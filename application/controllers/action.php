@@ -13,107 +13,48 @@ class Action extends MY_Controller {
             $to_queue = array();
             switch ($task) {
                 case 'reboot':
-                    foreach ($mac_list as $m) {
-                        $host = $this->hosts_model->deepDive(array('macaddress' => $m),
-                            array('hostname'));
-                        $to_queue[] = array(
-                            'hostname' => $host['hostname'],
-                            'macaddress' => $m,
-                            'operation' => 'reboot',
-                            'time' => date('Y-m-d H:i:s'),
-                            'successful' => 0
-                        );
-                    }
-                    
-                    break;
                 case 'shutdown':
+                case 'update':
+                case 'upgrade':
+                case 'dist_upgrade':
+                case 'update_info':
+                case 'remove_node':
                     foreach ($mac_list as $m) {
                         $host = $this->hosts_model->deepDive(array('macaddress' => $m),
                             array('hostname'));
-                        $to_queue[] = array(
-                            'hostname' => $host['hostname'],
-                            'macaddress' => $m,
-                            'operation' => 'shutdown',
-                            'time' => date('Y-m-d H:i:s'),
-                            'successful' => 0
-                        );
+                        if($host) {
+                            $to_queue[] = array(
+                                'hostname' => $host['hostname'],
+                                'macaddress' => $m,
+                                'operation' => $task,
+                                'time' => date('Y-m-d H:i:s'),
+                                'successful' => false,
+                                'by' => $_SESSION['username']
+                            );
+                        }
                     }
                     break;
                 case 'install':
-                    foreach ($mac_list as $m) {
-                        $host = $this->hosts_model->deepDive(array('macaddress' => $m),
-                            array('hostname'));
-                        $packages = explode(' ', $data['packages']);
-                        $clean_packages = array();
-                        foreach ($packages as $p) {
-                            array_push($clean_packages, '"'.$p.'"');
-                        }
-                        $to_queue[] = array(
-                            'hostname' => $host['hostname'],
-                            'macaddress' => $m,
-                            'args' => $clean_packages,
-                            'operation' => 'install',
-                            'time' => date('Y-m-d H:i:s'),
-                            'successful' => 0
-                        );
-                    }
-                    break;
                 case 'remove':
                     foreach ($mac_list as $m) {
                         $host = $this->hosts_model->deepDive(array('macaddress' => $m),
                             array('hostname'));
-                        $packages = explode(' ', $data['packages']);
-                        $clean_packages = array();
-                        foreach ($packages as $p) {
-                            array_push($clean_packages, '"'.$p.'"');
+                        if($host) {
+                            $packages = explode(' ', $data['packages']);
+                            $clean_packages = array();
+                            foreach ($packages as $p) {
+                                array_push($clean_packages, '"'.$p.'"');
+                            }
+                            $to_queue[] = array(
+                                'hostname' => $host['hostname'],
+                                'macaddress' => $m,
+                                'args' => $clean_packages,
+                                'operation' => $task,
+                                'time' => date('Y-m-d H:i:s'),
+                                'successful' => false,
+                                'by' => $_SESSION['username']
+                            );
                         }
-                        $to_queue[] = array(
-                            'hostname' => $host['hostname'],
-                            'macaddress' => $m,
-                            'args' => $clean_packages,
-                            'operation' => 'remove',
-                            'time' => date('Y-m-d H:i:s'),
-                            'successful' => 0
-                        );
-                    }
-                    break;
-                case 'upgrade':
-                    foreach ($mac_list as $m) {
-                        $host = $this->hosts_model->deepDive(array('macaddress' => $m),
-                            array('hostname'));
-                        $to_queue[] = array(
-                            'hostname' => $host['hostname'],
-                            'macaddress' => $m,
-                            'operation' => 'upgrade',
-                            'time' => date('Y-m-d H:i:s'),
-                            'successful' => 0
-                        );
-                    }
-                    break;
-                case 'dist_upgrade':
-                    foreach ($mac_list as $m) {
-                        $host = $this->hosts_model->deepDive(array('macaddress' => $m),
-                            array('hostname'));
-                        $to_queue[] = array(
-                            'hostname' => $host['hostname'],
-                            'macaddress' => $m,
-                            'operation' => 'dist_upgrade',
-                            'time' => date('Y-m-d H:i:s'),
-                            'successful' => 0
-                        );
-                    }
-                    break;
-                case 'update_info':
-                    foreach ($mac_list as $m) {
-                        $host = $this->hosts_model->deepDive(array('macaddress' => $m),
-                            array('hostname'));
-                        $to_queue[] = array(
-                            'hostname' => $host['hostname'],
-                            'macaddress' => $m,
-                            'operation' => 'update_info',
-                            'time' => date('Y-m-d H:i:s'),
-                            'successful' => 0
-                        );
                     }
                     break;
             }

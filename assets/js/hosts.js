@@ -21,13 +21,17 @@ $(document).ready(function() {
 	(function() {
 		function updateStatus() {
 			var host_list = new Array();
-			$.post(base_url+'index.php/hosts/refreshList', null, function(data) {
+			$.post(base_url+'index.php/hosts/refresh_status', null, function(data) {
 				status_list = $.parseJSON(data);
-				$('.status_indicator').each(function(i, obj){
-					if(status_list[obj.id])
-						$(this).html('<span class="label label-success">Available</span>');
+				$('.list_entry').each(function(i, obj){
+					if(status_list[obj.id] === true)
+						$(this).children('.status_indicator')
+								.html('<span class="label label-success">Available</span>');
+					else if(status_list[obj.id] === false)
+						$(this).children('.status_indicator')
+								.html('<span class="label label-important">Unavailable</span>');
 					else
-						$(this).html('<span class="label label-important">Unavailable</span>');
+						$(this).remove();
 				});
 			});	
 		}
@@ -46,7 +50,7 @@ $(document).ready(function() {
 	})();
 
 	(function() {
-		$('.select_all').click(function() {
+		$('#select_all').click(function() {
 			select_all = $(this);
 			if(select_all.hasClass('active')) {
 				select_all.html('Select All');
@@ -63,6 +67,12 @@ $(document).ready(function() {
 					button.html('Selected');
 				});
 			}
+		});
+	})();
+
+	(function() {
+		$('#refresh_list').click(function() {
+
 		});
 	})();
 });

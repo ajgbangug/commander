@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class User_model extends CI_Model {
+class User_model extends MY_Model {
 
     public $variable;
 
@@ -10,34 +10,26 @@ class User_model extends CI_Model {
         
     }
 
+    public function addUser($details) {
+        $db = $this->load_db();
+        $collection = $db->users;
+
+        return $collection->insert($details);
+    }
+
     public function getUser($details) {
-        $mongo = $this->login();
-        $this->config->load('mongodb');
-        $db = $mongo->selectDB($this->config->item('dbname'));
+        $db = $this->load_db();
         $collection = $db->users;
 
         return $collection->findOne($details);
     }
 
     public function updateUser($username, $details) {
-        $mongo = $this->login();
-        $this->config->load('mongodb');
-        $db = $mongo->selectDB($this->config->item('dbname'));
+        $db = $this->load_db();
         $collection = $db->users;
 
         return $collection->update($username, $details);
     }
-
-    public function login() {
-        $this->config->load('mongodb');
-        $dbname = $this->config->item('dbname');
-        $dbhost = $this->config->item('dbhost');
-        $username = $this->config->item('username');
-        $password = $this->config->item('password');
-        
-        return new Mongo("mongodb://{$username}:{$password}@{$dbhost}/{$dbname}");
-    }
-
 }
 
 /* End of file user_model.php */

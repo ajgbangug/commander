@@ -1,4 +1,3 @@
-<!--<?php print_r($profile); ?> -->
 <div class="row">
     <div class="span12 offset1">
         <div class="page-header">

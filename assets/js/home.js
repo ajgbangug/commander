@@ -2,7 +2,7 @@ $(document).ready(function() {
     (function() {
         function updateLogs() {
             var log_list = new Array();
-            $.post(base_url+'index.php/home/refreshLogs', null, function(data) {
+            $.post(base_url+'index.php/home/refresh_logs', null, function(data) {
                 log_list = $.parseJSON(data);
                 $('.status_indicator').each(function(i, obj){
                     if(log_list[obj.id])

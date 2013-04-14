@@ -1,19 +1,5 @@
 <div class="row">
-    <div class="span12 offset1">
-        <div class="page-header">
-            <h3>Dashboard</h3>
-        </div>
-        <h5>
-            Welcome <code><?php echo $_SESSION['username']; ?></code>!
-        </h5>
-        <h5>
-            Displayed below are the tasks that have been executed by the system including the hosts
-            which were affected and the timestamp of the task.
-        </h5>
-    </div>
-</div>
-<div class="row">
-    <div class="span12 offset1">
+    <div class="span12 offset2">
         <?php
             echo form_open('home/clear');
         ?>
@@ -27,6 +13,7 @@
                     <th>Timestamp</th>
                     <th>Operation</th>
                     <th>Hosts</th>
+                    <th>By</th>
                 </tr>
             </thead>
             <tbody>
@@ -58,6 +45,9 @@
                             ?>
                             </ul>
                         </td>
+                        <td>
+                            <?php echo $l['by']; ?>
+                        </td>
                     </tr>
                 <?php
                     }
@@ -66,7 +56,3 @@
         </table>
     </div>
 </div>
-<script type="text/javascript">
-    var base_url = '<?php echo base_url(); ?>';
-</script>
-<script src="<?php echo base_url('assets/js/home.js'); ?>"></script>

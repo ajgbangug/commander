@@ -15,17 +15,17 @@ class Hosts extends MY_Controller {
 
             $data['host_list'] = $this->hosts_model->getHosts(array(),
                 array('hostname', 'operatingsystem', 'lsbdistrelease', 'macaddress', 'ipaddress'));
-            $data['title'] = 'Hosts';
-            $data['log_list'] = $this->task_model->getLogs(array(), array());;
-            $this->load->view('templates/header', $data);
-            $this->load->view('pages/hosts', $data);
-            $this->load->view('templates/footer', $data);
+            $this->load->view('templates/header', array('title' => 'Hosts'));
+            $this->load->view('pages/hosts/page_header');
+            $this->load->view('pages/hosts/hosts_main', $data);
+            $this->load->view('pages/hosts/js_includes');
+            $this->load->view('templates/footer');
         } else {
             redirect('login');
         }
     }
 
-    public function refreshList()
+    public function refresh_status()
     {
         if ($this->is_logged_in()) {
             $this->load->model('hosts_model');
@@ -50,18 +50,8 @@ class Hosts extends MY_Controller {
             
             $data['profile'] = $this->hosts_model->deepDive($criteria, array());
             $this->load->view('templates/header', $data);
-            $this->load->view('pages/profile', $data);
-            $this->load->view('templates/footer', $data);
-        } else {
-            redirect('login');
-        }
-    }
-
-    public function clear() {
-        if($this->is_logged_in()) {
-            $this->load->model('hosts_model');
-            $this->hosts_model->clear();
-            redirect('hosts');
+            $this->load->view('pages/hosts/profile', $data);
+            $this->load->view('templates/footer');
         } else {
             redirect('login');
         }
