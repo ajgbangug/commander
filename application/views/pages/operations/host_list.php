@@ -1,5 +1,4 @@
-<button type="button" id="select_all" class="btn" data-toggle="button">Select All</button>
-<table class="table table-hover" id="host_list">
+<table class="table table-hover table-condensed" id="host_list">
     <thead>
         <tr>
             <th>Hostname</th>
@@ -19,7 +18,7 @@
                 <td><?php echo $h['lsbdistrelease']; ?></td>
                 <td class="status_indicator"></td>
                 <td>
-                    <?php echo form_open('hosts/profile', '', array('macaddress' => $h['macaddress'])); ?>
+                    <?php echo form_open('operations/profile', '', array('macaddress' => $h['macaddress'])); ?>
                         <?php
                             echo form_submit(array(
                                 'class' => 'view_button btn btn-small btn-info',

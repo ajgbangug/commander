@@ -38,6 +38,7 @@
 |
 */
 
+$route['operations/do/(:any)'] = 'operations/view/$1';
 $route['default_controller'] = 'home';
 $route['404_override'] = '';
 

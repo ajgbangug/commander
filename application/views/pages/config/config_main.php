@@ -1,7 +1,7 @@
 <div class="row">
     <div class="span12 offset2">
         <div class="tabbable">
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-pills">
                 <li class="active"><a href="#tab1" data-toggle="tab">Account Details</a></li>
                 <li><a href="#tab2" data-toggle="tab">New Account</a></li>
                 <li><a href="#tab3" data-toggle="tab">Database Server Details</a></li>

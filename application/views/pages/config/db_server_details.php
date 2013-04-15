@@ -1,4 +1,4 @@
-<h5>You can edit the database server details in <code>application/config/mongodb.php</code>.</h5>
+<p>You can edit the database server details in <code>application/config/mongodb.php</code>.</p>
 <table class="table table-hover">
     <thead>
         <th>Attribute</th>

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Hosts extends MY_Controller {
+class Operations extends MY_Controller {
 
     public function __construct()
     {
@@ -50,10 +50,40 @@ class Hosts extends MY_Controller {
             
             $data['profile'] = $this->hosts_model->deepDive($criteria, array());
             $this->load->view('templates/header', $data);
-            $this->load->view('pages/hosts/profile', $data);
+            $this->load->view('pages/operations/profile', $data);
             $this->load->view('templates/footer');
         } else {
             redirect('login');
+        }
+    }
+
+    public function view($page) {
+        if($this->is_logged_in()) {
+            $this->load->model('hosts_model');
+            $data['page'] = $page;
+            $data['host_list'] = $this->hosts_model->getHosts(array(),
+                array('hostname', 'operatingsystem', 'lsbdistrelease', 'macaddress', 'ipaddress'));
+            
+            switch ($page) {
+                case 'install_or_remove':
+                    $title = "Install/Remove";
+                    break;
+                case 'shutdown_or_reboot':
+                    $title = "Shutdown/Reboot";
+                    break;
+                case 'upgrade':
+                    $title = "Package/Distribution Upgrades";
+                    break;
+                case 'monitoring':
+                    $title = "Monitoring";
+                    break;
+            }
+
+            $this->load->view('templates/header', array('title' => $title));
+            $this->load->view('pages/operations/page_header', array('title' => $title));
+            $this->load->view('pages/operations/operations_main', $data);
+            $this->load->view('pages/operations/js_includes');
+            $this->load->view('templates/footer');
         }
     }
 }

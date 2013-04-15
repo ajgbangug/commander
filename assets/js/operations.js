@@ -8,6 +8,8 @@ $(document).ready(function() {
 				selected.push($(this).val());
 			});
 			$('.selection_list').val(selected);
+			task = $('.task_choice.active').val();
+			$('.task').val(task);
 			var postData = $(this).serializeArray();
 			if(confirm("Are you sure you want to queue the task?")) {
 				$.post(base_url+'index.php/action/enqueue', postData, function(data) {
@@ -21,7 +23,7 @@ $(document).ready(function() {
 	(function() {
 		function updateStatus() {
 			var host_list = new Array();
-			$.post(base_url+'index.php/hosts/refresh_status', null, function(data) {
+			$.post(base_url+'index.php/operations/refresh_status', null, function(data) {
 				status_list = $.parseJSON(data);
 				$('.list_entry').each(function(i, obj){
 					if(status_list[obj.id] === true)
@@ -67,12 +69,6 @@ $(document).ready(function() {
 					button.html('Selected');
 				});
 			}
-		});
-	})();
-
-	(function() {
-		$('#refresh_list').click(function() {
-
 		});
 	})();
 });

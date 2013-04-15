@@ -1,4 +1,4 @@
-<h5>Create a new login account to access the system.</h5>
+<p>Create a new login account to access the system.</p>
 <?php echo form_open('config/add_account', array('class' => 'form-horizontal')); ?>
     <fieldset>
         <div class="control-group">

@@ -1,6 +1,4 @@
-<h5>
-    This is your account. After editing your account, you will be logged out.
-</h5>
+<p>This is your account. After editing your account, you will be logged out.</p>
 <?php echo form_open('config/change_account', array('class' => 'form-horizontal')); ?>
     <fieldset>
         <div class="control-group">
