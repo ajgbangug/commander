@@ -12,7 +12,7 @@
                     <div class="container">
                         <span class="brand" href="#">Commander</span>
                         <ul class="nav">
-                            <li><a href="<?php echo site_url("home");?>">Home</a></li>
+                            <li><a href="<?php echo site_url("logs");?>">Logs</a></li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" id="operation" role="button"
                                     data-target="#" data-toggle="dropdown">

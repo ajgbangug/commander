@@ -4,28 +4,40 @@
         <div class="control-group">
             <label class="control-label" for="username">Username</label>
             <div class="controls">
-                <input type="text" id="username" name="username" value="<?php echo $account['username']; ?>">
+                <span class="uneditable-input" id="username"><?php echo $_SESSION['username']; ?></span>
             </div>
             <div class="controls">
                 <?php echo form_error('username'); ?>
             </div>
         </div>
         <div class="control-group">
-            <label class="control-label" for="password">Password</label>
+            <label class="control-label" for="old_password">Old Password</label>
             <div class="controls">
-                <input type="password" id="password" name="password" value="<?php echo $account['password']; ?>">
+                <input type="password" id="old_password" name="old_password"
+                    value="<?php echo set_value('old_password'); ?>">
             </div>
             <div class="controls">
-                <?php echo form_error('password'); ?>
+                <?php echo form_error('old_password'); ?>
             </div>
         </div>
         <div class="control-group">
-            <label class="control-label" for="conf_password" >Confirm Password</label>
+            <label class="control-label" for="new_password">New Password</label>
             <div class="controls">
-                <input type="password" id="conf_password" name="conf_password" value="<?php echo $account['password']; ?>">
+                <input type="password" id="new_password" name="new_password"
+                    value="<?php echo set_value('new_password'); ?>">
             </div>
             <div class="controls">
-                <?php echo form_error('password'); ?>
+                <?php echo form_error('new_password'); ?>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="new_conf_password" >Confirm New Password</label>
+            <div class="controls">
+                <input type="password" id="new_conf_password" name="new_conf_password"
+                    value="<?php echo set_value('new_conf_password'); ?>">
+            </div>
+            <div class="controls">
+                <?php echo form_error('new_conf_password'); ?>
             </div>
         </div>
         <div class="control-group">

@@ -22,7 +22,7 @@ class MY_Controller extends CI_Controller {
         $this->load->model('user_model');
         $details = array(
             'username' => $username,
-            'password' => $password
+            'password' => md5($password)
         );
         if($this->user_model->getUser($details) == NULL) {
             $this->form_validation->set_message('is_valid_account', 'Incorrect login details.');
@@ -39,6 +39,21 @@ class MY_Controller extends CI_Controller {
         );
         if($this->user_model->getUser($details) != NULL) {
             $this->form_validation->set_message('username_not_exists', 'Username already exists.');
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
+
+    public function correct_password($password, $username) {
+        $this->load->model('user_model');
+        $details = array(
+            'username' => $username,
+            'password' => md5($password)
+        );
+        
+        if($this->user_model->getUser($details) == NULL) {
+            $this->form_validation->set_message('correct_password', 'Incorrect Old Password.');
             return FALSE;
         } else {
             return TRUE;

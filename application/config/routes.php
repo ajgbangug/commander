@@ -39,7 +39,7 @@
 */
 
 $route['operations/do/(:any)'] = 'operations/view/$1';
-$route['default_controller'] = 'home';
+$route['default_controller'] = 'logs';
 $route['404_override'] = '';
 
 

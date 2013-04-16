@@ -30,6 +30,19 @@ class User_model extends MY_Model {
 
         return $collection->update($username, $details);
     }
+
+    public function getUsers($criteria, $columns) {
+        $db = $this->load_db();
+        $collection = $db->users;
+
+        return iterator_to_array($collection->find($criteria, $columns));
+    }
+    public function deleteUsers($criteria) {
+        $db = $this->load_db();
+        $collection = $db->users;
+
+        return $collection->remove($criteria);
+    }
 }
 
 /* End of file user_model.php */

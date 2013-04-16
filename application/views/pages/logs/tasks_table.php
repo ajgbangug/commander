@@ -1,13 +1,6 @@
 <div class="row">
     <div class="span12 offset2">
-        <?php
-            echo form_open('home/clear');
-        ?>
-            <input type="submit" class="btn btn-primary" value="Clear Tasks" />
-        <?php
-            echo form_close();
-        ?>
-        <table id="log_table" class="table table-hover table-condensed">
+        <table id="log_table" class="table table-hover table-bordered">
             <thead>
                 <tr>
                     <th>Timestamp</th>
@@ -54,5 +47,9 @@
                 ?>
             </tbody>
         </table>
+        <?php echo form_open('logs/clear', array('id' => 'clear_logs',
+            'class' => 'pull-right')); ?>
+            <input type="submit" class="btn btn-primary" value="Clear" />
+        <?php echo form_close(); ?>
     </div>
 </div>

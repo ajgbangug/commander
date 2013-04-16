@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Home extends MY_Controller {
+class Logs extends MY_Controller {
     
     public function __construct()
     {
@@ -10,14 +10,14 @@ class Home extends MY_Controller {
     public function index()
     {
         if($this->is_logged_in()) {
-            $data['title'] = 'Home';
+            $data['title'] = 'Logs';
             $this->load->model('task_model');
             $log_list = $this->task_model->getLogs(array(), array());
             $data['log_list'] = $log_list;
             $this->load->view('templates/header', $data);
-            $this->load->view('pages/home/page_header', $data);
-            $this->load->view('pages/home/tasks_table', $data);
-            $this->load->view('pages/home/js_includes', $data);
+            $this->load->view('pages/logs/page_header', $data);
+            $this->load->view('pages/logs/tasks_table', $data);
+            $this->load->view('pages/logs/js_includes', $data);
             $this->load->view('templates/footer', $data);
         } else {
             redirect('login');

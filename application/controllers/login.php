@@ -22,7 +22,7 @@ class Login extends MY_Controller {
         if($this->form_validation->run()) {
             session_start();
             $_SESSION['username'] = $this->input->post('username');
-            redirect('home');
+            redirect('logs');
         } else {
             $data['title'] = 'Login';
             $this->load->view('pages/login', $data);
