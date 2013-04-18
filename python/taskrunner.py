@@ -33,7 +33,7 @@ if __name__ == '__main__':
     hosts = db.hosts
 
     for t in task_list:
-        if is_online(t['macaddress'], t['_id']):
+        if is_online(t['macaddress'], t['_id']) or t['operation'] == 'remove_node':
             target = db.hosts.find_one({'macaddress': t['macaddress']}, {'ipaddress' : 1})
             env.hosts = [target['ipaddress']]
             if t['operation'] == 'shutdown':
