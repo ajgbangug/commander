@@ -43,7 +43,7 @@ class Logs extends MY_Controller {
         if($this->is_logged_in()) {
             $this->load->model('task_model');
             $this->task_model->clear();
-            redirect('home');
+            redirect('logs');
         } else {
             redirect('login');
         }
