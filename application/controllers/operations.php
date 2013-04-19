@@ -49,6 +49,7 @@ class Operations extends MY_Controller {
             );
             
             $data['profile'] = $this->hosts_model->deepDive($criteria, array());
+            $data['title'] = $data['profile']['hostname'];
             $this->load->view('templates/header', $data);
             $this->load->view('pages/operations/profile', $data);
             $this->load->view('templates/footer');
